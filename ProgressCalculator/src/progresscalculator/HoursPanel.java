@@ -5,6 +5,9 @@
  */
 package progresscalculator;
 
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
 /**
  *
  * @author 4400098772
@@ -31,6 +34,8 @@ public class HoursPanel extends javax.swing.JPanel {
         hoursPerMonthLabel = new javax.swing.JLabel();
         completedHoursField = new javax.swing.JTextField();
         hoursPerMonthField = new javax.swing.JTextField();
+        completedHoursError = new javax.swing.JLabel();
+        requiredHoursError = new javax.swing.JLabel();
 
         completedHoursLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         completedHoursLabel.setLabelFor(completedHoursLabel);
@@ -43,7 +48,12 @@ public class HoursPanel extends javax.swing.JPanel {
         completedHoursField.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
         hoursPerMonthField.setEditable(false);
+        hoursPerMonthField.setBackground(new java.awt.Color(204, 204, 204));
         hoursPerMonthField.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+
+        completedHoursError.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+
+        requiredHoursError.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -54,23 +64,28 @@ public class HoursPanel extends javax.swing.JPanel {
                     .addComponent(completedHoursLabel)
                     .addComponent(hoursPerMonthLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(hoursPerMonthField, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(completedHoursField, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 10, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(hoursPerMonthField)
+                    .addComponent(completedHoursField)
+                    .addComponent(completedHoursError, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
+                    .addComponent(requiredHoursError, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addComponent(completedHoursError, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(completedHoursLabel)
                     .addComponent(completedHoursField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(requiredHoursError, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(hoursPerMonthLabel)
-                    .addComponent(hoursPerMonthField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(hoursPerMonthField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(hoursPerMonthLabel))
+                .addGap(6, 6, 6))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -79,15 +94,37 @@ public class HoursPanel extends javax.swing.JPanel {
         hoursPerMonthField.setText(String.format("%.0f", requiredHours));
     }
     
+    public String getRequiredHours() {
+        return hoursPerMonthField.getText();
+    }
+    
     public String getCompletedHours()
     {
         return completedHoursField.getText();
     }
+    
+    public void setCompletedHoursError(String errorMessage) {
+        this.completedHoursError.setText(errorMessage);
+    }
+    
+    public JLabel getCompletedHoursError() {
+        return completedHoursError;
+    }
+    
+    public JLabel getRequiredHoursError() {
+        return requiredHoursError;
+    }
+
+    public void setRequiredHoursError(String errorMessage) {
+        this.requiredHoursError.setText(errorMessage);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel completedHoursError;
     private javax.swing.JTextField completedHoursField;
     private javax.swing.JLabel completedHoursLabel;
     private javax.swing.JTextField hoursPerMonthField;
     private javax.swing.JLabel hoursPerMonthLabel;
+    private javax.swing.JLabel requiredHoursError;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,6 +5,10 @@
  */
 package progresscalculator;
 
+import java.awt.Color;
+import java.awt.HeadlessException;
+import java.util.Timer;
+import java.util.TimerTask;
 import javax.swing.JOptionPane;
 
 /**
@@ -40,10 +44,11 @@ public class ProgressCalculator extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Progress Calculator");
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         hoursPerWeek.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         hoursPerWeek.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "6", "12", "15", "18", "24", "30" }));
-        hoursPerWeek.setToolTipText("");
+        hoursPerWeek.setToolTipText("Select the amount of hours per week to set required hours");
         hoursPerWeek.setBorder(javax.swing.BorderFactory.createTitledBorder("Hours Per Week"));
         hoursPerWeek.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -69,6 +74,7 @@ public class ProgressCalculator extends javax.swing.JFrame {
 
         calculateButton.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         calculateButton.setText("Calculate");
+        calculateButton.setToolTipText("Click here to calculate progress");
         calculateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 calculateButtonActionPerformed(evt);
@@ -77,6 +83,7 @@ public class ProgressCalculator extends javax.swing.JFrame {
 
         exitButton.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         exitButton.setText("Exit");
+        exitButton.setToolTipText("Click here to Exit");
         exitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exitButtonActionPerformed(evt);
@@ -108,51 +115,91 @@ public class ProgressCalculator extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(buttonsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(hours, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(113, Short.MAX_VALUE)
+                .addComponent(buttonsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(140, 140, 140))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(hours, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(weekHoursPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(weekHoursPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(hours, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(buttonsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(weekHoursPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(hours, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(buttonsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
+        getAccessibleContext().setAccessibleDescription("");
+
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    public void startRequiredHoursTimer() {
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask(){
+        @Override
+        public void run()
+        {
+            hours.setRequiredHoursError("");
+        }}, 2*1000);
+    }
+
+    public void startCompletedHoursTimer() {
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask(){
+        @Override
+        public void run()
+        {
+            hours.setCompletedHoursError("");
+        }
+        }, 2*1000);
+    }
+    
     private void calculateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calculateButtonActionPerformed
         // TODO add your handling code here:
         //To check if the user has entered the values properly 
-            if(requiredHours == 0 || hours.getCompletedHours() == null) 
-            { 
-                JOptionPane.showMessageDialog(null, "Please specify your completed hours and your required hours!", "Error!",  
-                                                JOptionPane.INFORMATION_MESSAGE); 
-            } 
-            else 
-            { 
-            double progressPercentage = (Double.parseDouble(hours.getCompletedHours()) / requiredHours) * 100; 
+        try
+        {
+            if(hours.getCompletedHours().equals(""))
+            {
+                hours.setCompletedHoursError("Enter your completed hours");
+                hours.getCompletedHoursError().setForeground(Color.red);
+                if(hours.getRequiredHours().equals(""))
+                {
+                    hours.setRequiredHoursError("Set your required hours");
+                    hours.getRequiredHoursError().setForeground(Color.red);
+                }
+                startCompletedHoursTimer();
+                startRequiredHoursTimer();
+            }
+            else if(hours.getRequiredHours().equals(""))
+            {
+                hours.setRequiredHoursError("Set your required hours");
+                hours.getRequiredHoursError().setForeground(Color.red);
+                startRequiredHoursTimer();
+            }
+            else
+            {
+                double progressPercentage = (Double.parseDouble(hours.getCompletedHours()) / requiredHours) * 100; 
 
             //Display the progress percentage 
             JOptionPane.showMessageDialog(null, String.format("Your current progress is %.2f", progressPercentage) + 
                                           "%"); 
-            } 
+            }
+        }
+        catch(HeadlessException | NumberFormatException e)
+        {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_calculateButtonActionPerformed
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
