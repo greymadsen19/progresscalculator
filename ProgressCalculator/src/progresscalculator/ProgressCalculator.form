@@ -31,7 +31,7 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace pref="113" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
               <Component id="buttonsPanel" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="140" max="-2" attributes="0"/>
           </Group>
@@ -88,13 +88,14 @@
               <Font name="Arial" size="12" style="0"/>
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="6">
-                <StringItem index="0" value="6"/>
-                <StringItem index="1" value="12"/>
-                <StringItem index="2" value="15"/>
-                <StringItem index="3" value="18"/>
-                <StringItem index="4" value="24"/>
-                <StringItem index="5" value="30"/>
+              <StringArray count="7">
+                <StringItem index="0" value="0"/>
+                <StringItem index="1" value="6"/>
+                <StringItem index="2" value="12"/>
+                <StringItem index="3" value="15"/>
+                <StringItem index="4" value="18"/>
+                <StringItem index="5" value="24"/>
+                <StringItem index="6" value="30"/>
               </StringArray>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Select the amount of hours per week to set required hours"/>

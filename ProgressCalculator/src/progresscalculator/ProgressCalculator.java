@@ -47,7 +47,7 @@ public class ProgressCalculator extends javax.swing.JFrame {
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         hoursPerWeek.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        hoursPerWeek.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "6", "12", "15", "18", "24", "30" }));
+        hoursPerWeek.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "6", "12", "15", "18", "24", "30" }));
         hoursPerWeek.setToolTipText("Select the amount of hours per week to set required hours");
         hoursPerWeek.setBorder(javax.swing.BorderFactory.createTitledBorder("Hours Per Week"));
         hoursPerWeek.addActionListener(new java.awt.event.ActionListener() {
@@ -115,7 +115,7 @@ public class ProgressCalculator extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(113, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(buttonsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(140, 140, 140))
             .addGroup(layout.createSequentialGroup()
@@ -187,13 +187,17 @@ public class ProgressCalculator extends javax.swing.JFrame {
                 hours.getRequiredHoursError().setForeground(Color.red);
                 startRequiredHoursTimer();
             }
+            else if(requiredHours == 0)
+            {
+                JOptionPane.showMessageDialog(null ,"Can't divide by zero!", "Error!", JOptionPane.ERROR_MESSAGE);
+            }
             else
             {
                 double progressPercentage = (Double.parseDouble(hours.getCompletedHours()) / requiredHours) * 100; 
 
-            //Display the progress percentage 
-            JOptionPane.showMessageDialog(null, String.format("Your current progress is %.2f", progressPercentage) + 
-                                          "%"); 
+                //Display the progress percentage 
+                JOptionPane.showMessageDialog(null, String.format("Your current progress is %.2f", progressPercentage) + 
+                                                    "%", "Progress", JOptionPane.INFORMATION_MESSAGE); 
             }
         }
         catch(HeadlessException | NumberFormatException e)
