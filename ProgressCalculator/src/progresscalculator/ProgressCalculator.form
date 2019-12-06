@@ -98,7 +98,7 @@
                 <StringItem index="6" value="30"/>
               </StringArray>
             </Property>
-            <Property name="toolTipText" type="java.lang.String" value="Select the amount of hours per week to set required hours"/>
+            <Property name="toolTipText" type="java.lang.String" value="Select or enter your hours per week"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                 <TitledBorder title="Hours Per Week"/>

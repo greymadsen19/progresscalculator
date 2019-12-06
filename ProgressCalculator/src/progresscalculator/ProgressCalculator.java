@@ -49,7 +49,7 @@ public class ProgressCalculator extends javax.swing.JFrame {
 
         hoursPerWeek.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         hoursPerWeek.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "6", "12", "15", "18", "24", "30" }));
-        hoursPerWeek.setToolTipText("Select the amount of hours per week to set required hours");
+        hoursPerWeek.setToolTipText("Select or enter your hours per week");
         hoursPerWeek.setBorder(javax.swing.BorderFactory.createTitledBorder("Hours Per Week"));
         hoursPerWeek.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
