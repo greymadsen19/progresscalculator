@@ -24,6 +24,7 @@ public class ProgressCalculator extends javax.swing.JFrame {
      */
     public ProgressCalculator() {
         initComponents();
+        hoursPerWeek.setEditable(true);
     }
 
     /**
@@ -143,6 +144,12 @@ public class ProgressCalculator extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * This creates a timer
+     * that will set the required hours
+     * error to a blank label with a delay
+     * after the creation of the timer
+     */
     public void startRequiredHoursTimer() {
         Timer timer = new Timer();
         timer.schedule(new TimerTask(){
@@ -153,6 +160,12 @@ public class ProgressCalculator extends javax.swing.JFrame {
         }}, 2*1000);
     }
 
+    /**
+     * This creates a timer
+     * that sets the completed hours
+     * error to a blank label after a delay
+     * from when the timer is created
+     */
     public void startCompletedHoursTimer() {
         Timer timer = new Timer();
         timer.schedule(new TimerTask(){
@@ -213,7 +226,7 @@ public class ProgressCalculator extends javax.swing.JFrame {
 
     private void hoursPerWeekActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hoursPerWeekActionPerformed
         // TODO add your handling code here:
-        requiredHours = Double.parseDouble((String) hoursPerWeek.getSelectedItem()) * 4; 
+        requiredHours = Double.parseDouble((String)hoursPerWeek.getSelectedItem()) * 4; 
         hours.setRequiredHours(requiredHours); 
     }//GEN-LAST:event_hoursPerWeekActionPerformed
 
